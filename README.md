@@ -11,55 +11,44 @@ Five specialized AI agents — coordinated by an orchestrator — analyze profil
 [![Next.js](https://img.shields.io/badge/Frontend-Next.js_15-black?style=for-the-badge)](https://nextjs.org)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict_Mode-blue?style=for-the-badge)](https://typescriptlang.org)
 
+### [Live Demo](https://aptsalt.github.io/agenthire/)
+
 ---
 
 ## Screenshots
 
-### Landing Page
-
-![Landing Page](docs/screenshots/landing.png)
-
-### Dashboard — Agents Thinking in Real-Time
-
-![Dashboard Active](docs/screenshots/dashboard-agents-active.png)
-
-Agents processing a live query — Profile Analyst has completed (green, with inference stats: qwen2.5-coder:14b, 7.4s, 74in/53out, 34.4 tok/s), Market Researcher is thinking (yellow). The React Flow graph updates in real-time showing agent states. Chat panel shows streaming responses with clickable navigation links.
-
-### Dashboard — Pipeline Complete
-
-![Dashboard Complete](docs/screenshots/dashboard-complete.png)
-
-All 5 agents completed (green). Pipeline summary shows total stats: **2,578 tokens, 30.0s, 28.2 tok/s avg speed** — all running locally on Ollama with zero cloud API calls. Session bar tracks cumulative token count across responses.
-
-### Jobs — Live Results from Pipeline
-
-![Jobs](docs/screenshots/jobs.png)
-
-3 job listings auto-populated from the Market Researcher agent's structured JSON output. Each card shows company, location, salary range ($160K-$270K), employment type, skills tags, and experience level badge. Search and filter bar included.
-
-### Profile Management
-
-![Profiles](docs/screenshots/profiles.png)
-
-Full profile card with skills (color-coded by level and category), experience timeline with highlights, education section, and profile strength metrics (completeness, skills coverage, ATS score).
-
-### New Profile Form
-
-![New Profile Modal](docs/screenshots/new-profile-modal.png)
-
-Create profiles manually with dynamic sections for skills (with category/level dropdowns), experience entries (with highlights), and education. All fields validated before save.
-
-### Upload Resume — AI-Powered Parsing
-
-![Upload Resume Modal](docs/screenshots/upload-resume-modal.png)
-
-Upload a `.txt` resume file and the local Ollama model parses it into structured profile data (name, skills, experience, education). The parsed data pre-fills the profile form for review before saving.
-
-### Architecture — System Overview
-
-![Architecture](docs/screenshots/architecture.png)
-
-Visual breakdown of the multi-agent pipeline: system overview flow, MCP server cards with registered tools, LangGraph orchestrator details, and infrastructure features.
+<table>
+<tr>
+<td width="33%"><b>Landing Page</b><br><a href="docs/screenshots/landing.png"><img src="docs/screenshots/landing.png" alt="Landing Page"></a></td>
+<td width="33%"><b>Dashboard — Agents Thinking</b><br><a href="docs/screenshots/dashboard-agents-active.png"><img src="docs/screenshots/dashboard-agents-active.png" alt="Dashboard Active"></a></td>
+<td width="33%"><b>Dashboard — Pipeline Complete</b><br><a href="docs/screenshots/dashboard-complete.png"><img src="docs/screenshots/dashboard-complete.png" alt="Dashboard Complete"></a></td>
+</tr>
+<tr>
+<td><i>Hero page with agent count and stats</i></td>
+<td><i>Profile Analyst complete (34.4 tok/s), Market Researcher thinking — React Flow graph updates live</i></td>
+<td><i>All 5 agents done: 2,578 tokens, 30.0s, 28.2 tok/s — zero cloud API calls</i></td>
+</tr>
+<tr>
+<td width="33%"><b>Jobs — Live from Pipeline</b><br><a href="docs/screenshots/jobs.png"><img src="docs/screenshots/jobs.png" alt="Jobs"></a></td>
+<td width="33%"><b>Profile Management</b><br><a href="docs/screenshots/profiles.png"><img src="docs/screenshots/profiles.png" alt="Profiles"></a></td>
+<td width="33%"><b>Architecture Overview</b><br><a href="docs/screenshots/architecture.png"><img src="docs/screenshots/architecture.png" alt="Architecture"></a></td>
+</tr>
+<tr>
+<td><i>3 jobs auto-populated from Market Researcher JSON — salary, skills, remote badges</i></td>
+<td><i>Skills, experience timeline, education, profile strength metrics (92% completeness)</i></td>
+<td><i>Pipeline flow, MCP servers with tools, LangGraph orchestrator details</i></td>
+</tr>
+<tr>
+<td width="33%"><b>New Profile Form</b><br><a href="docs/screenshots/new-profile-modal.png"><img src="docs/screenshots/new-profile-modal.png" alt="New Profile Modal"></a></td>
+<td width="33%"><b>Upload Resume — AI Parsing</b><br><a href="docs/screenshots/upload-resume-modal.png"><img src="docs/screenshots/upload-resume-modal.png" alt="Upload Resume Modal"></a></td>
+<td width="33%"></td>
+</tr>
+<tr>
+<td><i>Dynamic skills (category/level), experience, education sections with validation</i></td>
+<td><i>Upload .txt resume — Ollama parses into structured profile for review</i></td>
+<td></td>
+</tr>
+</table>
 
 ---
 
