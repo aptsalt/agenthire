@@ -1,0 +1,77 @@
+{
+  "id": "profile-analyst-suite",
+  "name": "Profile Analyst Eval Suite",
+  "agentName": "profile-analyst",
+  "passingThreshold": 0.7,
+  "testCases": [
+    {
+      "id": "pa-001",
+      "agentName": "profile-analyst",
+      "description": "Extract skills from a software engineer resume",
+      "input": {
+        "message": "Extract skills from this resume text:\n\nJohn Doe - Senior Software Engineer\n5 years experience with Python, TypeScript, React, AWS.\nLed a team of 5 engineers. Built microservices architecture.\nExpert in machine learning with TensorFlow and PyTorch.\nStrong communication and leadership skills.\nMS Computer Science from MIT."
+      },
+      "scoringCriteria": [
+        {
+          "name": "output_is_json",
+          "type": "heuristic",
+          "weight": 1,
+          "config": {
+            "checks": [{ "name": "Valid JSON", "fn": "is_json" }]
+          }
+        },
+        {
+          "name": "contains_key_skills",
+          "type": "heuristic",
+          "weight": 2,
+          "config": {
+            "checks": [{ "name": "Key Skills Present", "fn": "contains_keywords" }],
+            "keywords": ["python", "typescript", "react", "aws", "machine learning", "tensorflow"]
+          }
+        },
+        {
+          "name": "quality_assessment",
+          "type": "llm-judge",
+          "weight": 3,
+          "config": {
+            "rubric": "Rate how well the output extracts and categorizes skills from the resume. Check if skills are properly categorized (technical vs soft), levels are assigned, and nothing important is missed. Score 0-10.",
+            "maxScore": 10
+          }
+        }
+      ],
+      "tags": ["skills", "extraction"]
+    },
+    {
+      "id": "pa-002",
+      "agentName": "profile-analyst",
+      "description": "Build complete profile from parsed data",
+      "input": {
+        "message": "Build a complete professional profile from this information:\n\nName: Jane Smith\nCurrent Role: Product Manager at Google\nPrevious: PM at Stripe (2019-2022), Analyst at McKinsey (2017-2019)\nEducation: MBA Stanford, BS Economics UC Berkeley\nSkills: Product strategy, data analysis, SQL, A/B testing, agile, stakeholder management\nLocation: San Francisco, CA"
+      },
+      "scoringCriteria": [
+        {
+          "name": "completeness",
+          "type": "llm-judge",
+          "weight": 3,
+          "config": {
+            "rubric": "Rate the completeness of the profile. Does it include name, title, summary, experience entries with dates, education, and categorized skills? Score 0-10.",
+            "maxScore": 10
+          }
+        },
+        {
+          "name": "structured_output",
+          "type": "heuristic",
+          "weight": 2,
+          "config": {
+            "checks": [
+              { "name": "Valid JSON", "fn": "is_json" },
+              { "name": "Sufficient Detail", "fn": "min_length" }
+            ],
+            "minLength": 200
+          }
+        }
+      ],
+      "tags": ["profile", "build"]
+    }
+  ]
+}

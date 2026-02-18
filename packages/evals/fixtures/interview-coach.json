@@ -1,0 +1,75 @@
+{
+  "id": "interview-coach-suite",
+  "name": "Interview Coach Eval Suite",
+  "agentName": "interview-coach",
+  "passingThreshold": 0.7,
+  "testCases": [
+    {
+      "id": "ic-001",
+      "agentName": "interview-coach",
+      "description": "Generate behavioral interview questions for a PM role",
+      "input": {
+        "message": "Generate 5 behavioral interview questions for a Senior Product Manager role at a fintech company. The role requires experience with payments, cross-functional leadership, and data-driven decision making."
+      },
+      "scoringCriteria": [
+        {
+          "name": "question_relevance",
+          "type": "llm-judge",
+          "weight": 3,
+          "config": {
+            "rubric": "Rate how relevant the generated questions are to a Senior PM role at a fintech company. Questions should cover payments domain knowledge, leadership, and data-driven decision making. Score 0-10.",
+            "maxScore": 10
+          }
+        },
+        {
+          "name": "question_count",
+          "type": "heuristic",
+          "weight": 1,
+          "config": {
+            "checks": [{ "name": "Contains Multiple Questions", "fn": "contains_keywords" }],
+            "keywords": ["?"]
+          }
+        },
+        {
+          "name": "sufficient_detail",
+          "type": "heuristic",
+          "weight": 1,
+          "config": {
+            "checks": [{ "name": "Sufficient Length", "fn": "min_length" }],
+            "minLength": 300
+          }
+        }
+      ],
+      "tags": ["behavioral", "questions", "pm"]
+    },
+    {
+      "id": "ic-002",
+      "agentName": "interview-coach",
+      "description": "Evaluate a STAR-method answer",
+      "input": {
+        "message": "Evaluate this interview answer:\n\nQuestion: Tell me about a time you had to make a difficult decision with limited data.\n\nAnswer: At my previous company, we had to decide whether to launch a new feature. The data was inconclusive so I gathered the team and we discussed it. We decided to launch and it went well. Everyone was happy with the result."
+      },
+      "scoringCriteria": [
+        {
+          "name": "evaluation_quality",
+          "type": "llm-judge",
+          "weight": 4,
+          "config": {
+            "rubric": "The evaluation should identify that the answer is weak - it lacks specific details, doesn't follow STAR method properly (no clear Situation, Task, Action, Result), and uses vague language. The evaluation should provide constructive feedback. Score 0-10.",
+            "maxScore": 10
+          }
+        },
+        {
+          "name": "mentions_star",
+          "type": "heuristic",
+          "weight": 1,
+          "config": {
+            "checks": [{ "name": "References STAR Method", "fn": "contains_keywords" }],
+            "keywords": ["STAR", "situation", "task", "action", "result"]
+          }
+        }
+      ],
+      "tags": ["evaluation", "star-method"]
+    }
+  ]
+}

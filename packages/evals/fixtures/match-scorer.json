@@ -1,0 +1,66 @@
+{
+  "id": "match-scorer-suite",
+  "name": "Match Scorer Eval Suite",
+  "agentName": "match-scorer",
+  "passingThreshold": 0.7,
+  "testCases": [
+    {
+      "id": "ms-001",
+      "agentName": "match-scorer",
+      "description": "Score a strong match between profile and job",
+      "input": {
+        "message": "Score the match between this profile and job:\n\nProfile: Senior React Developer with 6 years experience in React, TypeScript, Node.js, AWS. Led teams of 3-5 engineers. Experience with CI/CD, testing, agile.\n\nJob: Senior Frontend Engineer at Stripe. Required: 5+ years React, TypeScript, testing. Nice to have: AWS, Node.js, fintech experience."
+      },
+      "scoringCriteria": [
+        {
+          "name": "score_quality",
+          "type": "llm-judge",
+          "weight": 3,
+          "config": {
+            "rubric": "The output should give a high match score (70+/100) since the profile strongly matches the job. It should break down skill match, experience match, and identify minimal gaps. Check if the reasoning is sound. Score 0-10.",
+            "maxScore": 10
+          }
+        },
+        {
+          "name": "includes_gaps",
+          "type": "heuristic",
+          "weight": 1,
+          "config": {
+            "checks": [{ "name": "Mentions Gaps", "fn": "contains_keywords" }],
+            "keywords": ["gap", "missing", "improve", "fintech"]
+          }
+        }
+      ],
+      "tags": ["scoring", "strong-match"]
+    },
+    {
+      "id": "ms-002",
+      "agentName": "match-scorer",
+      "description": "Score a weak match between profile and job",
+      "input": {
+        "message": "Score the match between this profile and job:\n\nProfile: Junior Marketing Coordinator with 1 year experience in social media, content writing, Canva. BA in Communications.\n\nJob: Senior Machine Learning Engineer. Required: 5+ years ML/AI, PhD preferred, Python, TensorFlow, distributed systems."
+      },
+      "scoringCriteria": [
+        {
+          "name": "score_quality",
+          "type": "llm-judge",
+          "weight": 3,
+          "config": {
+            "rubric": "The output should give a LOW match score (under 30/100) since the profile does not match the job at all. It should identify major skill gaps and honestly assess the mismatch. Score 0-10.",
+            "maxScore": 10
+          }
+        },
+        {
+          "name": "structured_response",
+          "type": "heuristic",
+          "weight": 1,
+          "config": {
+            "checks": [{ "name": "Sufficient Detail", "fn": "min_length" }],
+            "minLength": 150
+          }
+        }
+      ],
+      "tags": ["scoring", "weak-match"]
+    }
+  ]
+}

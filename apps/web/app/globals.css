@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@theme {
+  /* Dark theme (default) */
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #111118;
+  --color-bg-tertiary: #1a1a24;
+  --color-bg-card: #15151f;
+  --color-bg-card-hover: #1c1c2a;
+
+  --color-border-primary: #2a2a3a;
+  --color-border-secondary: #3a3a4a;
+
+  --color-text-primary: #f0f0f5;
+  --color-text-secondary: #b0b0c5;
+  --color-text-muted: #7e7e96;
+
+  --color-accent-blue: #3b82f6;
+  --color-accent-blue-hover: #2563eb;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-cyan: #06b6d4;
+  --color-accent-green: #10b981;
+  --color-accent-orange: #f59e0b;
+  --color-accent-red: #ef4444;
+
+  /* Agent status colors */
+  --color-agent-idle: #7e7e96;
+  --color-agent-thinking: #f59e0b;
+  --color-agent-executing: #3b82f6;
+  --color-agent-waiting: #8b5cf6;
+  --color-agent-error: #ef4444;
+  --color-agent-complete: #10b981;
+
+  /* Gradient tokens */
+  --color-gradient-start: #3b82f6;
+  --color-gradient-end: #8b5cf6;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-purple);
+    color: white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-secondary);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+  }
+}
+
+@layer components {
+  .agent-glow-idle {
+    box-shadow: 0 0 8px rgba(126, 126, 150, 0.15);
+  }
+
+  .agent-glow-thinking {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3), 0 0 40px rgba(245, 158, 11, 0.1);
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .agent-glow-executing {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.1);
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .agent-glow-waiting {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.1);
+    animation: glow-pulse 3s ease-in-out infinite;
+  }
+
+  .agent-glow-error {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.3), 0 0 40px rgba(239, 68, 68, 0.1);
+  }
+
+  .agent-glow-complete {
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.25), 0 0 32px rgba(16, 185, 129, 0.08);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-gradient-start), var(--color-gradient-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Smooth expand/collapse transition */
+  .expand-enter {
+    animation: expand-in 0.2s ease-out;
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes expand-in {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+    transform: translateY(0);
+  }
+}
+
+/* React Flow overrides for dark theme */
+.react-flow__node {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.react-flow__edge-path {
+  stroke: var(--color-border-secondary) !important;
+  stroke-width: 1.5 !important;
+}
+
+.react-flow__edge.animated .react-flow__edge-path {
+  stroke: var(--color-accent-blue) !important;
+  stroke-width: 2 !important;
+  opacity: 0.6;
+}
+
+.react-flow__background {
+  background-color: var(--color-bg-card) !important;
+}
+
+.react-flow__background pattern circle {
+  fill: var(--color-border-primary) !important;
+}
+
+.react-flow__controls {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.react-flow__controls-button {
+  background: var(--color-bg-card) !important;
+  border-color: var(--color-border-primary) !important;
+  color: var(--color-text-secondary) !important;
+  fill: var(--color-text-secondary) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--color-bg-card-hover) !important;
+}
+
+.react-flow__minimap {
+  background-color: var(--color-bg-secondary) !important;
+  border: 1px solid var(--color-border-primary) !important;
+  border-radius: 8px !important;
+}

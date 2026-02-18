@@ -1,0 +1,24 @@
+{
+  "name": "@agenthire/evals",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "eval": "tsx src/runner.ts",
+    "eval:report": "tsx reporters/cli.ts"
+  },
+  "dependencies": {
+    "@agenthire/shared": "*",
+    "@agenthire/observability": "*",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "tsx": "^4.19.0",
+    "vitest": "^3.0.0"
+  }
+}
