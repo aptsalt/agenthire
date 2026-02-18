@@ -6,7 +6,6 @@ import {
   MapPin,
   DollarSign,
   Clock,
-  ExternalLink,
   Search,
   Filter,
   Wifi,

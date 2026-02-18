@@ -17,7 +17,6 @@ import {
   Layers,
   Radio,
   Shield,
-  BarChart3,
   GitBranch,
   Cpu,
 } from "lucide-react";

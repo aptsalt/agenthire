@@ -9,7 +9,6 @@ import {
   CheckCircle,
   ChevronDown,
   ChevronUp,
-  Briefcase,
   Star,
 } from "lucide-react";
 import { useAppStore } from "@/lib/store";
@@ -159,7 +158,7 @@ function MatchCard({
                         </span>
                         <span
                           className={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
-                            gap.gapSeverity === "critical"
+                            gap.gapSeverity === "major"
                               ? "bg-accent-red/10 text-accent-red"
                               : gap.gapSeverity === "moderate"
                                 ? "bg-accent-orange/10 text-accent-orange"
